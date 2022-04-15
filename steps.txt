@@ -1,0 +1,9 @@
+Steps to spinup Docker container:
+    -docker pull mysql/mysql-server:latest
+    -docker run --name #nameofcontainer -v /sqldirectory:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=#### -d mysql/mysql-server:latest
+
+Install Docker Sql Client:
+    -apt-get install mysql-client
+
+bash into container
+    -sudo docker exec -it #containerid
