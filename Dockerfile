@@ -1,9 +1,9 @@
-##We specify the base image we need for our
-## go application
-FROM golang:1.12.0-alpine3.9
+##We specify the base image 
+FROM golang:1.12.0-alpine3.9 AS builder
 ## We create an /app directory within our
 ## image that will hold our application source
 ## files
+## Add git to the image to download git dependencies inside the image
 RUN apk update && apk add --no-cache git
 
 RUN mkdir /app
@@ -14,10 +14,15 @@ ADD . /app
 ## any further commands inside our /app
 ## directory
 WORKDIR /app
-## we run go build to compile the binary
+## get gorilla/mux dependency from git
+## run go build to compile the binary
 ## executable of our Go program
 RUN go get github.com/gorilla/mux
 RUN go build -o main .
 ## Our start command which kicks off
 ## our newly created binary executable
-CMD ["/app/main"]
+
+FROM alpine:latest
+COPY --from=builder /app .
+
+CMD ["./main"]
