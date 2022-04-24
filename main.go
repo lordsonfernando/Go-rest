@@ -24,8 +24,8 @@ func handleRequests() {
 	//create router
 	infoRouter := mux.NewRouter().StrictSlash(true)
 	infoRouter.HandleFunc("/", home)
-	infoRouter.HandleFunc("/returnInfo/{Id}", returnInfo)
-	log.Fatal(http.ListenAndServe(":10000", infoRouter))
+	infoRouter.HandleFunc("/returninfo/{Id}", returnInfo)
+	log.Fatal(http.ListenAndServe(":8080", infoRouter))
 
 }
 
