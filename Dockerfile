@@ -1,4 +1,5 @@
 ##We specify the base image 
+## added builder...this image contains executables
 FROM golang:1.12.0-alpine3.9 AS builder
 ## We create an /app directory within our
 ## image that will hold our application source
@@ -22,6 +23,7 @@ RUN go build -o main .
 ## Our start command which kicks off
 ## our newly created binary executable
 
+## Executes build from builder image ...this reduces the size of docker image from 372 Mb to 13.5 Mb
 FROM alpine:latest
 COPY --from=builder /app .
 

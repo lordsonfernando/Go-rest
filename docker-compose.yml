@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  api:
+    container_name:  "Go_Rest_api"
+    #use the image which is build from our Dockerfile no need to build and tag docker file seperately
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
